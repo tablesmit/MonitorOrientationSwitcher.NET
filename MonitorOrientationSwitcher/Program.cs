@@ -10,7 +10,14 @@ namespace MonitorOrientationSwitcher
 														NativeMethods.DMDO_270};
         public static void Main(string[] args)
         {
-            AntiClockWise(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]));
+            if (args.Length == 3)
+            {
+                AntiClockWise(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]));
+            } else
+            {
+                Console.Write(@"MonitorOrientationSwitcher
+Usage: MonitorOrientationSwitcher.exe <rotation-angle> <width> <height>");
+            }
         }
         private static void AntiClockWise(int angle, int width, int height)
         {
@@ -61,7 +68,7 @@ namespace MonitorOrientationSwitcher
         {
             // helper to wrap ChangeDisplaySettings Win32 API
 
-            int iRet = NativeMethods.ChangeDisplaySettings(ref dm, 0);
+            var iRet = NativeMethods.ChangeDisplaySettings(ref dm, 0);
             switch (iRet)
             {
                 case NativeMethods.DISP_CHANGE_SUCCESSFUL:
